@@ -3,7 +3,8 @@ from flask import Flask, render_template, request, redirect, url_for
 app = Flask(__name__)
 
 # Lista que asocia nombres de usuario con correos electrónicos
-usuarios_correos = {"Mercedes" :	"mcast386@xtec.cat",
+usuarios_correos = {
+"Mercedes" :	"mcast386@xtec.cat",
 "Rayane":	"rayane@rayane.sa",
 "Mohamed":	"moha@gmail.com",
 "Jad":	"jad@gmail.com",
@@ -29,7 +30,7 @@ usuarios_correos = {"Mercedes" :	"mcast386@xtec.cat",
 "peruano":	"peru@gmail.com"}
 
 @app.route('/encontrado/<name>')
-def dashboard(name):
+def encontrado(name):
     # Verificar si el nombre de usuario existe en la lista
     if name in usuarios_correos:
         correo = usuarios_correos[name]
@@ -41,7 +42,7 @@ def dashboard(name):
 def getmail():
     if request.method == 'POST':
         user = request.form['name']
-        return redirect(url_for('dashboard', name=user))
+        return redirect(url_for('encontrado', name=user))
     else:
         user = request.args.get('name')
         return render_template('getmail.html')
@@ -55,7 +56,7 @@ def addmail():
         # Actualizar la lista usuarios_correos con los nuevos datos
         usuarios_correos.update({user: email})
 
-        return redirect(url_for('encontrado', name=user))
+        return redirect(url_for('encontrado', name=user, email=email))
     else:
         return render_template('addmail.html')
 

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Pagina loging</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <title>Pagina login</title>
 </head>
-   <body>
-      <form action = "http://localhost:5000/getmail" method = "post">
-         <p>Username:</p>
-         <p><input type = "text" name = "name" /></p>
-         <p><input type = "submit" value = "submit" /></p>
-      </form>
-   </body>
+<body>
+    <form action="http://localhost:5000/getmail" method="post">
+        <p>Username:</p>
+        <p><input type="text" name="name" /></p>
+        <p><input type="submit" value="submit" /></p>
+    </form>
+    <!-- Agregar un enlace para ir a la página addmail -->
+    <a href="http://localhost:5000/addmail">Agregar nuevo usuario</a>
+</body>
 </html>
