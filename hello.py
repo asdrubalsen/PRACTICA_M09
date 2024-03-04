@@ -2,14 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
 
 app = Flask(__name__)
-app.secret_key = 'se_la_saben_todos'
+app.secret_key = 'hola joan'
 
 # Configuración de la base de datos
 db = mysql.connector.connect(
     host="localhost",
-    user="Jose Manuel",
-    password="JoseManuel",
-    database="usuario"
+    user="Asdrúbal",
+    password="Admin22.",
+    database="listacorreo"
 )
 cursor = db.cursor()
 
@@ -21,9 +21,9 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['correo']
         password = request.form['password']
-        cursor.execute("SELECT * FROM login WHERE Email = %s AND Contraseña = %s", (username, password))
+        cursor.execute("SELECT * FROM alumnos WHERE correo = %s AND contraseña = %s", (email, password))
         user = cursor.fetchone()
         if user:
             session['username'] = user[1]
@@ -37,7 +37,8 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        cursor.execute("INSERT INTO nommail (Nombre, contraseña) VALUES (%s, %s)", (username, password))
+        email = request.form['email']
+        cursor.execute("INSERT INTO alumnos (nombre, correo, contraseña) VALUES (%s, %s, %s)", (username, email, password))
         db.commit()
         return redirect(url_for('login'))
     return render_template('register.html')
@@ -55,7 +56,7 @@ def logout():
 
 @app.route('/public-section')
 def public():
-    return render_template('dashboard.html')
+    return render_template('publico.html')
 
 # Ruta para el formulario de registro
 @app.route('/registro', methods=['GET', 'POST'])
@@ -63,12 +64,12 @@ def registro():
     if request.method == 'POST':
         email = request.form['email']
         contraseña = request.form['contraseña']
-        
+        username = request.form['nombre']
         # Insertar el nuevo usuario en la base de datos
-        cursor.execute("INSERT INTO login (email, contraseña) VALUES (%s, %s)", (email, contraseña))
+        cursor.execute("INSERT INTO alumnos (nombre, correo, contraseña) VALUES (%s, %s, %s)", (username, email, contraseña))
         db.commit()
         
-        return redirect(url_for('registro_exitoso'))
+        return render_template('registrado.html')
     return render_template('registro.html')
 
 # Ruta para la página de registro exitoso
@@ -95,7 +96,7 @@ def contacto():
         cursor.execute("INSERT INTO sugerencias (nombre, email, comentario) VALUES (%s, %s, %s)", (nombre, email, mensaje))
         db.commit()
         
-        return 'Mensaje enviado correctamente'
+        return render_template('publico.html')
 
 
 if __name__ == '__main__':

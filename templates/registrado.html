@@ -1,29 +1,21 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Asdrúbal</title>
+    <title>Registro exitoso</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <header>
-        <h1>Sobre Mi</h1>
+        <h1>Mi Aplicación</h1>
         <nav>
             <ul>
                 <li><a href="/">Inicio</a></li>
-                <li><a href="https://www.google.es">Portafolio</a></li>
             </ul>
         </nav>
     </header>
-    
-    <main>
-        <section>
-        
-        </section>
-    </main>
-
-    <footer>
-    </footer>
+    <h1>Registro exitoso</h1>
+    <a href="{{ url_for('index') }}">Volver a inicio</a>
 </body>
 </html>

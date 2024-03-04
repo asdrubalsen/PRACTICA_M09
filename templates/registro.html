@@ -7,12 +7,25 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <header>
+        <h1>Mi Aplicación</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
     <h1>Registro de Usuario</h1>
     <form method="post" action="/registro">
+        <label for="nombre">Nombre:</label><br>
+        <input type="nombre" id="nombre" name="nombre" required><br>
+
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required><br>
+
         <label for="contraseña">Contraseña:</label><br>
         <input type="password" id="contraseña" name="contraseña" required><br>
+
         <input type="submit" value="Registrar">
     </form>
 </body>
